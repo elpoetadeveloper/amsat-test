@@ -9,11 +9,12 @@ fi
 SCRIPT_NAME="$1"
 BAT_FILE="${SCRIPT_NAME}.bat"
 LOG_FILE="/var/amsat/logs/${SCRIPT_NAME}.log"
-CONFIG_FILE="/var/amsat/data/it/dosbox.conf"
+CONFIG_FILE="/var/amsat/data/github/it/dosbox.conf"
+IT_DIR="/var/amsat/data/github/it"
 
-mkdir -p /var/amsat/logs /var/amsat/data/it/captures /var/amsat/data/passes
+mkdir -p /var/amsat/logs "${IT_DIR}/captures /var/amsat/data/github/passes"
 
-chmod -R ugo+rwx /var/amsat/data/it
+chmod -R ugo+rwx ${IT_DIR}
 
 # Ensure the log file exists before tailing
 touch "$LOG_FILE"
@@ -40,7 +41,7 @@ sbtype=none
 gus=false
 
 [dosbox]
-captures=/var/amsat/data/it/captures
+captures="${IT_DIR}/captures"
 
 [render]
 frameskip=1
@@ -53,7 +54,7 @@ cycleup=10
 cycledown=20
 
 [autoexec]
-mount c /var/amsat/data/it
+mount c ${IT_DIR}
 c:
 ${BAT_FILE}
 exit
@@ -97,5 +98,4 @@ fi
 
 echo "[INFO] $(date '+%Y-%m-%d %H:%M:%S') - DOSBox completed successfully for $SCRIPT_NAME" | tee -a "$LOG_FILE"
 exit 0
-
 
