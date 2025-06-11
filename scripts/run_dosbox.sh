@@ -12,7 +12,7 @@ LOG_FILE="/var/amsat/logs/${SCRIPT_NAME}.log"
 CONFIG_FILE="/var/amsat/data/github/it/dosbox.conf"
 IT_DIR="/var/amsat/data/github/it"
 
-mkdir -p /var/amsat/logs "${IT_DIR}/captures /var/amsat/data/github/passes"
+mkdir -p /var/amsat/logs ${IT_DIR}/captures /var/amsat/data/github/passes
 
 chmod -R ugo+rwx ${IT_DIR}
 
@@ -41,7 +41,7 @@ sbtype=none
 gus=false
 
 [dosbox]
-captures="${IT_DIR}/captures"
+captures=${IT_DIR}/captures
 
 [render]
 frameskip=1
