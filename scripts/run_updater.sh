@@ -5,13 +5,18 @@ PASSES_HTML_DIR="/var/amsat/data/github/passes/html"
 PASSES_TXT_DIR="/var/amsat/data/github/passes/txt"
 JAVA_KEPS_UPDATER_DIR="/var/amsat/data/github/keps_updater"
 SCRIPTS_DIR="/var/amsat/data/github/scripts"
+OUT_DIR="/var/amsat/data/output"
 
 mkdir -p "${PASSES_HTML_DIR}" 
 mkdir -p "${PASSES_TXT_DIR}" 
+mkdir -p  ${OUT_DIR}/files ${OUT_DIR}/files/passes ${OUT_DIR}/files/frontend/dist ${OUT_DIR}/files/frontend/templates
+
+chmod -R ugo+rwx ${IT_DIR}
+chmod -R ugo+rwx ${OUT_DIR}
 
 # List of script base names (without .bat)
 #SCRIPTS=("subePasoPart1" "subePasoPart2" "subePasoPart3" "subePasoPart4" "subePasoPart5" "subePasoPart6" "subePasoPart7" "subePasoPart8" "subePasoPart9" "subePasoPart10")
-SCRIPTS=("subePasoPart1")
+SCRIPTS=("")
 
 shopt -s nocaseglob
 htm_files=(${IT_DIR}/pasos*.htm)
