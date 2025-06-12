@@ -10,12 +10,10 @@ SCRIPT_NAME="$1"
 BAT_FILE="${SCRIPT_NAME}.bat"
 LOG_FILE="/var/amsat/logs/${SCRIPT_NAME}.log"
 CONFIG_FILE="/var/amsat/data/github/it/dosbox.conf"
-OUT_DIR="/var/amsat/data/output"
 
-mkdir -p /var/amsat/logs ${IT_DIR}/captures /var/amsat/data/github/passes ${OUT_DIR}/files ${OUT_DIR}/files/passes ${OUT_DIR}/files/frontend/dist ${OUT_DIR}/files/frontend/templates
+mkdir -p /var/amsat/logs ${IT_DIR}/captures /var/amsat/data/github/passes
 
 chmod -R ugo+rwx ${IT_DIR}
-chmod -R ugo+rwx ${OUT_DIR}
 
 # Ensure the log file exists before tailing
 touch "$LOG_FILE"
