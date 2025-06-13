@@ -56,14 +56,14 @@ else
 fi
 
 #Execute java update keps
-rm -R ${JAVA_KEPS_UPDATER_DIR}/target
-mkdir -p ${JAVA_KEPS_UPDATER_DIR}/target
-javac -d ${JAVA_KEPS_UPDATER_DIR}/target ${JAVA_KEPS_UPDATER_DIR}/src/amsat/*.java
-java -cp ${JAVA_KEPS_UPDATER_DIR}/target amsat.KepsUpdateRunner
+#rm -R ${JAVA_KEPS_UPDATER_DIR}/target
+#mkdir -p ${JAVA_KEPS_UPDATER_DIR}/target
+#javac -d ${JAVA_KEPS_UPDATER_DIR}/target ${JAVA_KEPS_UPDATER_DIR}/src/amsat/*.java
+#java -cp ${JAVA_KEPS_UPDATER_DIR}/target amsat.KepsUpdateRunner
 
 chmod -R ugo+rwx ${OUT_DIR}
 
 cp -r ${PASSES_HTML_DIR} ${OUT_DIR}/files/passes
-cp ${JAVA_KEPS_DIR}/output/all.json ${OUT_DIR}/files/frontend/dist
-cp ${JAVA_KEPS_DIR}/output/nasa.all ${IT_DIR}
-cp ${JAVA_KEPS_DIR}/output/spacetrack1.txt ${JAVA_KEPS_DIR}
+#cp ${JAVA_KEPS_DIR}/output/all.json ${OUT_DIR}/files/frontend/dist
+#cp ${JAVA_KEPS_DIR}/output/nasa.all ${IT_DIR}
+#cp ${JAVA_KEPS_DIR}/output/spacetrack1.txt ${JAVA_KEPS_DIR}
