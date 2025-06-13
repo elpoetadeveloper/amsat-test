@@ -56,10 +56,10 @@ else
 fi
 
 #Execute java update keps
-#rm -R ${JAVA_KEPS_UPDATER_DIR}/target
-#mkdir -p ${JAVA_KEPS_UPDATER_DIR}/target
-#javac -d ${JAVA_KEPS_UPDATER_DIR}/target ${JAVA_KEPS_UPDATER_DIR}/src/amsat/*.java
-#java -cp ${JAVA_KEPS_UPDATER_DIR}/target amsat.KepsUpdateRunner
+rm -R ${JAVA_KEPS_UPDATER_DIR}/target
+mkdir -p ${JAVA_KEPS_UPDATER_DIR}/target
+javac -d ${JAVA_KEPS_UPDATER_DIR}/target ${JAVA_KEPS_UPDATER_DIR}/src/amsat/*.java
+java -cp ${JAVA_KEPS_UPDATER_DIR}/target amsat.KepsUpdateRunner
 
 chmod -R ugo+rwx ${OUT_DIR}
 
