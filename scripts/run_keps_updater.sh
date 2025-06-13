@@ -10,7 +10,6 @@ OUT_DIR="/var/amsat/data/output"
 mkdir -p ${PASSES_HTML_DIR} ${PASSES_TXT_DIR} ${OUT_DIR}/files ${OUT_DIR}/files/passes ${OUT_DIR}/files/frontend/dist ${OUT_DIR}/files/frontend/templates
 
 chmod -R ugo+rwx ${IT_DIR}
-chmod -R ugo+rwx ${OUT_DIR}
 
 shopt -s nocaseglob
 htm_files=(${IT_DIR}/pasos*.htm)
@@ -61,6 +60,8 @@ rm -R ${JAVA_KEPS_UPDATER_DIR}/target
 mkdir -p ${JAVA_KEPS_UPDATER_DIR}/target
 javac -d ${JAVA_KEPS_UPDATER_DIR}/target ${JAVA_KEPS_UPDATER_DIR}/src/amsat/*.java
 java -cp ${JAVA_KEPS_UPDATER_DIR}/target amsat.KepsUpdateRunner
+
+chmod -R ugo+rwx ${OUT_DIR}
 
 cp -r ${PASSES_HTML_DIR} ${OUT_DIR}/files/passes
 cp ${JAVA_KEPS_DIR}/output/all.json ${OUT_DIR}/files/frontend/dist
