@@ -66,6 +66,6 @@ java -cp ${JAVA_KEPS_UPDATER_DIR}/target amsat.KepsUpdateRunner
 
 cp ${JAVA_KEPS_DIR}/output/all.json ${OUT_DIR}/files/frontend/dist
 cp ${JAVA_KEPS_DIR}/output/nasa.all ${IT_DIR}
-cp ${JAVA_KEPS_DIR}/output/spacetrack2.txt ${JAVA_KEPS_DIR}
+cp ${JAVA_KEPS_DIR}/output/spacetrack1.txt ${JAVA_KEPS_DIR}
 
 
