@@ -1,3 +1,6 @@
+#!/bin/bash
+
+COMPILE_AND_RUN="$1"
 IT_DIR="/var/amsat/data/github/it"
 OUT_DIR="/var/amsat/data/output"
 PASSES_DIR="${OUT_DIR}/passes"
@@ -56,11 +59,19 @@ else
     echo "[WARNING] $(date '+%Y-%m-%d %H:%M:%S') - No matching .txt files found."
 fi
 
+# Check if COMPILE_AND_RUN is equal to EXECUTE
+if [ "$COMPILE_AND_RUN" == "EXECUTE" ]; then
+
+echo "Preparing to compile and run the program..."
 #Execute java update keps
 rm -R ${JAVA_KEPS_UPDATER_DIR}/target
 mkdir -p ${JAVA_KEPS_UPDATER_DIR}/target
 javac -d ${JAVA_KEPS_UPDATER_DIR}/target ${JAVA_KEPS_UPDATER_DIR}/src/amsat/*.java
 java -cp ${JAVA_KEPS_UPDATER_DIR}/target amsat.KepsUpdateRunner
+
+else
+  echo "COMPILE_AND_RUN is not EXECUTE, skipping the compile and run process."
+fi
 
 chmod -R ugo+rwx ${OUT_DIR}
 
