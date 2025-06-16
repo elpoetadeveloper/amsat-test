@@ -1,13 +1,14 @@
 IT_DIR="/var/amsat/data/github/it"
-PASSES_DIR="/var/amsat/data/github/passes"
+OUT_DIR="/var/amsat/data/output"
+PASSES_DIR="${OUT_DIR}/passes"
 PASSES_HTML_DIR="${PASSES_DIR}/html"
 PASSES_TXT_DIR="${PASSES_DIR}/txt"
 JAVA_KEPS_UPDATER_DIR="/var/amsat/data/github/keps_updater"
 JAVA_KEPS_DIR="/var/amsat/data/github/keps"
 SCRIPTS_DIR="/var/amsat/data/github/scripts"
-OUT_DIR="/var/amsat/data/output"
 
-mkdir -p ${PASSES_HTML_DIR} ${PASSES_TXT_DIR} ${OUT_DIR}/files ${OUT_DIR}/files/passes ${OUT_DIR}/files/frontend/dist ${OUT_DIR}/files/frontend/templates
+
+mkdir -p ${PASSES_HTML_DIR} ${PASSES_TXT_DIR} ${OUT_DIR}/passes ${OUT_DIR}/files ${OUT_DIR}/files/passes ${OUT_DIR}/files/frontend/dist ${OUT_DIR}/files/frontend/templates
 
 chmod -R ugo+rwx ${IT_DIR}
 
@@ -56,14 +57,14 @@ else
 fi
 
 #Execute java update keps
-#rm -R ${JAVA_KEPS_UPDATER_DIR}/target
-#mkdir -p ${JAVA_KEPS_UPDATER_DIR}/target
-#javac -d ${JAVA_KEPS_UPDATER_DIR}/target ${JAVA_KEPS_UPDATER_DIR}/src/amsat/*.java
-#java -cp ${JAVA_KEPS_UPDATER_DIR}/target amsat.KepsUpdateRunner
+rm -R ${JAVA_KEPS_UPDATER_DIR}/target
+mkdir -p ${JAVA_KEPS_UPDATER_DIR}/target
+javac -d ${JAVA_KEPS_UPDATER_DIR}/target ${JAVA_KEPS_UPDATER_DIR}/src/amsat/*.java
+java -cp ${JAVA_KEPS_UPDATER_DIR}/target amsat.KepsUpdateRunner
 
 chmod -R ugo+rwx ${OUT_DIR}
 
 cp -r ${PASSES_HTML_DIR} ${OUT_DIR}/files/passes
-#cp ${JAVA_KEPS_DIR}/output/all.json ${OUT_DIR}/files/frontend/dist
-#cp ${JAVA_KEPS_DIR}/output/nasa.all ${IT_DIR}
-#cp ${JAVA_KEPS_DIR}/output/spacetrack1.txt ${JAVA_KEPS_DIR}
+cp ${JAVA_KEPS_DIR}/output/all.json ${OUT_DIR}/files/frontend/dist
+cp ${JAVA_KEPS_DIR}/output/nasa.all ${IT_DIR}
+cp ${JAVA_KEPS_DIR}/output/spacetrack1.txt ${JAVA_KEPS_DIR}
