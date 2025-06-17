@@ -10,15 +10,14 @@ JAVA_KEPS_UPDATER_DIR="/var/amsat/data/github/keps_updater"
 JAVA_KEPS_DIR="/var/amsat/data/github/keps"
 SCRIPTS_DIR="/var/amsat/data/github/scripts"
 
-
-mkdir -p ${PASSES_HTML_DIR} ${PASSES_TXT_DIR} ${OUT_DIR}
+mkdir -p ${OUT_DIR}
 
 chmod -R ugo+rwx ${IT_DIR}
 chmod -R ugo+rwx ${OUT_DIR}
 
 rm -rf "${OUT_DIR:?}"/{*,.[!.]*,..?*}
 
-mkdir -p ${OUT_DIR}/passes ${OUT_DIR}/files ${OUT_DIR}/files/passes ${OUT_DIR}/files/frontend/dist ${OUT_DIR}/files/frontend/templates
+mkdir -p ${PASSES_HTML_DIR} ${PASSES_TXT_DIR} ${OUT_DIR}/files ${OUT_DIR}/files/passes ${OUT_DIR}/files/frontend/dist ${OUT_DIR}/files/frontend/templates
 
 shopt -s nocaseglob
 htm_files=(${IT_DIR}/pasos*.htm)
