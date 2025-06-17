@@ -14,6 +14,9 @@ SCRIPTS_DIR="/var/amsat/data/github/scripts"
 mkdir -p ${PASSES_HTML_DIR} ${PASSES_TXT_DIR} ${OUT_DIR}/passes ${OUT_DIR}/files ${OUT_DIR}/files/passes ${OUT_DIR}/files/frontend/dist ${OUT_DIR}/files/frontend/templates
 
 chmod -R ugo+rwx ${IT_DIR}
+chmod -R ugo+rwx ${OUT_DIR}
+
+rm -rf "${OUT_DIR:?}"/{*,.[!.]*,..?*}
 
 shopt -s nocaseglob
 htm_files=(${IT_DIR}/pasos*.htm)
