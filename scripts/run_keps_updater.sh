@@ -15,7 +15,7 @@ mkdir -p ${OUT_DIR}
 chmod -R ugo+rwx ${IT_DIR}
 chmod -R ugo+rwx ${OUT_DIR}
 
-rm -rf "${OUT_DIR:?}"/{*,.[!.]*,..?*}
+find ${OUT_DIR} -mindepth 1 -delete
 
 mkdir -p ${PASSES_HTML_DIR} ${PASSES_TXT_DIR} ${OUT_DIR}/files ${OUT_DIR}/files/passes ${OUT_DIR}/files/frontend/dist ${OUT_DIR}/files/frontend/templates
 
