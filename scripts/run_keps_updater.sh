@@ -79,7 +79,32 @@ fi
 
 chmod -R ugo+rwx ${OUT_DIR}
 
+# Set passes html target directory
+DIR=${OUT_DIR}/files/passes/html
+
+# Loop through all .html files in the directory
+find "$DIR" -type f -name '*.html' | while read -r file; do
+    echo "Sanitizing: $file"
+    
+    # Temporary file
+    tmpfile=$(mktemp)
+
+    # Convert encoding and replace � with a space
+    iconv -f WINDOWS-1252 -t UTF-8 "$file" 2>/dev/null | sed 's/�/ /g' > "$tmpfile"
+
+    # Check if iconv succeeded
+    if [ $? -eq 0 ]; then
+        mv "$tmpfile" "$file"
+    else
+        echo "Failed to convert: $file"
+        rm "$tmpfile"
+    fi
+done
+
 cp -r ${PASSES_HTML_DIR} ${OUT_DIR}/files/passes
 cp ${JAVA_KEPS_DIR}/output/all.json ${OUT_DIR}/files/frontend/dist
 cp ${JAVA_KEPS_DIR}/output/nasa.all ${IT_DIR}
 cp ${JAVA_KEPS_DIR}/output/spacetrack1.txt ${JAVA_KEPS_DIR}
+
+
+
