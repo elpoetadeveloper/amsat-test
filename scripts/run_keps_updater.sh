@@ -8,7 +8,6 @@ PASSES_HTML_DIR="${PASSES_DIR}/html"
 PASSES_TXT_DIR="${PASSES_DIR}/txt"
 JAVA_KEPS_UPDATER_DIR="/var/amsat/data/github/keps_updater"
 JAVA_KEPS_DIR="/var/amsat/data/github/keps"
-SCRIPTS_DIR="/var/amsat/data/github/scripts"
 
 mkdir -p ${OUT_DIR}
 
