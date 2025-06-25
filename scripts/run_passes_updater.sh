@@ -1,10 +1,8 @@
 #!/bin/bash
 
-SCRIPTS_DIR="/var/amsat/data/github/scripts"
-
 # List of script base names (without .bat)
 #SCRIPTS=("subePasoPart1" "subePasoPart2" "subePasoPart3" "subePasoPart4" "subePasoPart5" "subePasoPart6" "subePasoPart7" "subePasoPart8" "subePasoPart9" "subePasoPart10")
-SCRIPTS=("subePasoPart1" "subePasoPart2")
+SCRIPTS=()
 
 for script in "${SCRIPTS[@]}"; do
   echo "[INFO] $(date '+%Y-%m-%d %H:%M:%S') - Running $script.bat batch script..."
