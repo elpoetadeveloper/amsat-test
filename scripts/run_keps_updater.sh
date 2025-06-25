@@ -225,6 +225,7 @@ fi
 # Copy directory contents if it exists
 if [ -d "${ORIG_PASSES}" ]; then
     cp -rf "${ORIG_PASSES}/." "${IT_DIR}"
+    echo "[ Original passes restore to it directory ]"
 else
     echo "Directory ${ORIG_PASSES} does not exist. Skipping copy."
 fi
