@@ -10,7 +10,7 @@ JAVA_KEPS_UPDATER_DIR="/var/amsat/data/github/keps_updater"
 JAVA_KEPS_DIR="/var/amsat/data/github/keps"
 SCRIPTS_DIR="/var/amsat/data/github/scripts"
 WEB_DIR="/var/amsat/data/web"
-ORIG_PASSES="/var/amsat/data/original_passes" 
+ORIGIN_PASSES="/var/amsat/data/origin_passes" 
 
 mkdir -p ${PASSES_DIR}
 
@@ -223,11 +223,11 @@ else
 fi
 
 # Copy directory contents if it exists
-if [ -d "${ORIG_PASSES}" ]; then
-    cp -rf "${ORIG_PASSES}/." "${IT_DIR}"
-    echo "[ Original passes restore to it directory ]"
+if [ -d "${ORIGIN_PASSES}" ]; then
+    cp -rf "${ORIGIN_PASSES}/." "${IT_DIR}"
+    echo "[ Origin passes restore to it directory ]"
 else
-    echo "Directory ${ORIG_PASSES} does not exist. Skipping copy."
+    echo "Directory ${ORIGIN_PASSES} does not exist. Skipping copy."
 fi
 
 
