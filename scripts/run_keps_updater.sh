@@ -2,7 +2,7 @@
 
 # **** REMOVE-ME [VAR] ****
 COMPILE_AND_RUN="$1"
-IT_DIR="/var/amsat/data/github/it"
+IT_DIR="/var/amsat/data/it"
 PASSES_DIR="/var/amsat/data/passes"
 PASSES_HTML_DIR="${PASSES_DIR}/html"
 PASSES_TXT_DIR="${PASSES_DIR}/txt"
