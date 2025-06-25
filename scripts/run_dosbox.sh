@@ -79,10 +79,16 @@ cleanup() {
 # Trap to ensure cleanup runs on exit
 trap 'cleanup $?' EXIT INT TERM
 
-# Run DOSBox and capture output
+# Run DOSBox and capture output with timeout
 echo "[INFO] $(date '+%Y-%m-%d %H:%M:%S') - Starting DOSBox for $SCRIPT_NAME..." | tee -a "$LOG_FILE"
-dosbox -conf "$CONFIG_FILE" -noconsole >> "$LOG_FILE" 2>&1
+timeout 30m dosbox -conf "$CONFIG_FILE" -noconsole >> "$LOG_FILE" 2>&1
 DOSBOX_EXIT_CODE=$?
+
+# Detect timeout
+if [ $DOSBOX_EXIT_CODE -eq 124 ]; then
+    echo "[ERROR] $(date '+%Y-%m-%d %H:%M:%S') - DOSBox terminated due to timeout after 30 minutes." | tee -a "$LOG_FILE"
+    cleanup 124
+fi
 
 # Detect fatal X11 error
 if grep -q "fatal IO error 11" "$LOG_FILE"; then
@@ -96,7 +102,6 @@ if [ $DOSBOX_EXIT_CODE -ne 0 ]; then
     cleanup $DOSBOX_EXIT_CODE
 fi
 
-echo "[INFO] $(date '+%Y-%m-%d %H:%M:%S') - DOSBox completed successfully for $SCRIPT_NAME" | tee -a "$LOG_FILE"
+echo "[INFO] $(date '+%Y-%m-%d %H:%M:%S') - DOSBox completed for $SCRIPT_NAME" | tee -a "$LOG_FILE"
 exit 0
-
 
