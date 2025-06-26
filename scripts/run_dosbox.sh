@@ -16,6 +16,12 @@ mkdir -p /var/amsat/logs ${IT_DIR}/captures
 
 chmod -R ugo+rwx ${IT_DIR}
 
+# Rotate old log if it exists
+if [ -f "$LOG_FILE" ]; then
+  TIMESTAMP=$(date '+%Y%m%d_%H%M%S')
+  mv "$LOG_FILE" "${LOG_FILE}.${TIMESTAMP}"
+fi
+
 # Ensure the log file exists before tailing
 touch "$LOG_FILE"
 
