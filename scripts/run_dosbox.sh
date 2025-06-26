@@ -2,8 +2,8 @@
 
 # Check if argument is provided
 if [ -z "$1" ]; then
-  echo "[WARNING] Usage: $0 <script_name_without_extension>"
-  exit 1
+    echo "[WARNING] Usage: $0 <script_name_without_extension>"
+    exit 1
 fi
 
 SCRIPT_NAME="$1"
@@ -13,13 +13,12 @@ CONFIG_FILE="/var/amsat/data/it/dosbox.conf"
 IT_DIR="/var/amsat/data/it"
 
 mkdir -p /var/amsat/logs ${IT_DIR}/captures
-
 chmod -R ugo+rwx ${IT_DIR}
 
 # Rotate old log if it exists
 if [ -f "$LOG_FILE" ]; then
-  TIMESTAMP=$(date '+%Y%m%d_%H%M%S')
-  mv "$LOG_FILE" "${LOG_FILE}.${TIMESTAMP}"
+    TIMESTAMP=$(date '+%Y%m%d_%H%M%S')
+    mv "$LOG_FILE" "${LOG_FILE}.${TIMESTAMP}"
 fi
 
 # Ensure the log file exists before tailing
@@ -62,32 +61,59 @@ cycledown=20
 [autoexec]
 mount c ${IT_DIR}
 c:
-${BAT_FILE}
+call ${BAT_FILE}
 exit
 EOF
 
 # Start Xvfb manually
 XVFB_DISPLAY=":99"
-Xvfb $XVFB_DISPLAY -screen 0 640x480x16 & 
+Xvfb $XVFB_DISPLAY -screen 0 640x480x16 &
 XVFB_PID=$!
+
+# Wait a moment for Xvfb to start
+sleep 1
 
 # Export display
 export DISPLAY=$XVFB_DISPLAY
 
 # Cleanup function
 cleanup() {
-    echo "[INFO] $(date '+%Y-%m-%d %H:%M:%S') - Cleaning up Xvfb for $SCRIPT_NAME"
-    kill $XVFB_PID 2>/dev/null
-    wait $XVFB_PID 2>/dev/null
+    echo "[INFO] $(date '+%Y-%m-%d %H:%M:%S') - Cleaning up Xvfb and DOSBox for $SCRIPT_NAME"
+    
+    # Kill the entire process group (timeout and its children including DOSBox)
+    if [ ! -z "$TIMEOUT_PID" ]; then
+        # Kill the process group
+        kill -TERM -$TIMEOUT_PID 2>/dev/null
+        sleep 2
+        kill -KILL -$TIMEOUT_PID 2>/dev/null
+        wait $TIMEOUT_PID 2>/dev/null
+    fi
+    
+    # Backup cleanup - kill any remaining DOSBox processes
+    pkill -9 -f "dosbox.*$CONFIG_FILE" 2>/dev/null
+    pkill -9 dosbox 2>/dev/null
+    
+    # Kill Xvfb
+    if [ ! -z "$XVFB_PID" ]; then
+        kill -9 $XVFB_PID 2>/dev/null
+        wait $XVFB_PID 2>/dev/null
+    fi
+    
     exit $1
 }
 
 # Trap to ensure cleanup runs on exit
 trap 'cleanup $?' EXIT INT TERM
 
-# Run DOSBox and capture output with timeout
+# Run DOSBox in background with process group
 echo "[INFO] $(date '+%Y-%m-%d %H:%M:%S') - Starting DOSBox for $SCRIPT_NAME..." | tee -a "$LOG_FILE"
-timeout 30m dosbox -conf "$CONFIG_FILE" -noconsole >> "$LOG_FILE" 2>&1
+
+# Start timeout in a new process group so we can kill the entire group
+setsid timeout --preserve-status --kill-after=5s 30m dosbox -conf "$CONFIG_FILE" -noconsole >> "$LOG_FILE" 2>&1 &
+TIMEOUT_PID=$!
+
+# Wait for the timeout or completion of the DOSBox process
+wait $TIMEOUT_PID
 DOSBOX_EXIT_CODE=$?
 
 # Detect timeout
@@ -110,4 +136,3 @@ fi
 
 echo "[INFO] $(date '+%Y-%m-%d %H:%M:%S') - DOSBox completed for $SCRIPT_NAME" | tee -a "$LOG_FILE"
 exit 0
-
