@@ -224,12 +224,12 @@ else
 fi
 
 # Copy directory contents if it exists
-if [ -d "${ORIGIN_PASSES}" ]; then
-    cp -rf "${ORIGIN_PASSES}/." "${IT_DIR}"
-    echo "[ Origin passes restore to it directory ]"
-else
-    echo "Directory ${ORIGIN_PASSES} does not exist. Skipping copy."
-fi
+#if [ -d "${ORIGIN_PASSES}" ]; then
+#    cp -rf "${ORIGIN_PASSES}/." "${IT_DIR}"
+#    echo "[ Origin passes restore to it directory ]"
+#else
+#    echo "Directory ${ORIGIN_PASSES} does not exist. Skipping copy."
+#fi
 
 
 
