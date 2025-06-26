@@ -109,7 +109,7 @@ trap 'cleanup $?' EXIT INT TERM
 echo "[INFO] $(date '+%Y-%m-%d %H:%M:%S') - Starting DOSBox for $SCRIPT_NAME..." | tee -a "$LOG_FILE"
 
 # Start timeout in a new process group so we can kill the entire group
-setsid timeout --preserve-status --kill-after=5s 30m dosbox -conf "$CONFIG_FILE" -noconsole >> "$LOG_FILE" 2>&1 &
+setsid timeout --preserve-status --kill-after=5s 15m dosbox -conf "$CONFIG_FILE" -noconsole >> "$LOG_FILE" 2>&1 &
 TIMEOUT_PID=$!
 
 # Wait for the timeout or completion of the DOSBox process
