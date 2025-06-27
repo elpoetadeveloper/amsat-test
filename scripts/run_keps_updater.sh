@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # **** REMOVE-ME [VAR] ****
-COMPILE_AND_RUN="$1"
+#COMPILE_AND_RUN="$1"
 #IT_DIR="/var/amsat/data/it"
 IT_DIR="/var/amsat/data/github/it"
 PASSES_DIR="/var/amsat/data/passes"
@@ -65,7 +65,7 @@ else
 fi
 
 # Check if COMPILE_AND_RUN is equal to EXECUTE **** REMOVE-ME [IF] ****
-if [ "$COMPILE_AND_RUN" == "EXECUTE" ]; then
+#if [ "$COMPILE_AND_RUN" == "EXECUTE" ]; then
 
 echo "Preparing to compile and run the program..."
 #Execute java update keps
@@ -74,9 +74,9 @@ mkdir -p ${JAVA_KEPS_UPDATER_DIR}/target
 javac -d ${JAVA_KEPS_UPDATER_DIR}/target ${JAVA_KEPS_UPDATER_DIR}/src/amsat/*.java
 java -cp ${JAVA_KEPS_UPDATER_DIR}/target amsat.KepsUpdateRunner
 
-else
-  echo "COMPILE_AND_RUN is not EXECUTE, skipping the compile and run process."
-fi
+#else
+#  echo "COMPILE_AND_RUN is not EXECUTE, skipping the compile and run process."
+#fi
 
 chmod -R ugo+rwx ${PASSES_DIR}
 
